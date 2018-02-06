@@ -23,7 +23,7 @@ Steps:
 2) Submit for sampling using gpu_umbrella.sh script
 3) Once job completes, you will have a folder called "GAFF" containing other folders named by the angles you restrained around.
 4) You should also have an output log file minGAFF.out which gives information about whether the simulations failed or not, and what force constants were used for each angle.
-5) Navigate to folder containing GAFF/ directory and run this line of code to compute the dihedral angles for each simulation: 
+5) Navigate to folder containing GAFF/ directory (likely where you submitted job) and run this line of code to compute the dihedral angles for each simulation: 
     To run this, enter this line of code: for k in {0..350..10}; do echo $k; cd GAFF/$k; vmd -dispdev none -e ../../trajComponent.tcl -args 5 ../../vacDivaline.prmtop nvt01.dcd; cd ../../; done
 6) Next run overlapy.py.  It will generate an overlap plot of all the sampled dihedral angles.
 7) Update the centers.dat file to contain the appropriate restraint angles and force constants
