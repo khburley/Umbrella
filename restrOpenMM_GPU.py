@@ -100,10 +100,11 @@ def runOpenMM(parm, topology, system, positions, rad, K, Indices, solvate):
     # harmonically restrain dihedral angle
     # see units, http://docs.openmm.org/6.3.0/userguide/theory.html
     pi = np.pi
-    harmonic = mm.CustomTorsionForce("k*min(dtheta, 2*pi-dtheta)^2 + pi; dtheta = abs(theta-theta0);");
+    #harmonic = mm.CustomTorsionForce("k*min(dtheta, 2*pi-dtheta)^2 + pi; dtheta = abs(theta-theta0);");
+    harmonic = mm.CustomTorsionForce("k*min(dtheta, 2*pi-dtheta)^2; dtheta = abs(theta-theta0); pi = %.3f" % pi);
     harmonic.addPerTorsionParameter("theta0");
     harmonic.addPerTorsionParameter("k");
-    harmonic.addGlobalParameter("pi",pi);
+    #harmonic.addGlobalParameter("pi",pi);
     #harmonic.setParameter("pi",pi);
     system.addForce(harmonic)
     harmonic.addTorsion(Indices[0], Indices[1], Indices[2], Indices[3], (rad, K))
@@ -188,8 +189,8 @@ def load_and_minimize(infiles,dogaff,dogaff2,gaffdir,atomlist,solvate):
     ifs.close()
 
     # identify the input files 
-    prmFile = 'vacDivaline.prmtop'
-    inpFile = 'vacDivaline.inpcrd'
+    prmFile = 'watVA.prmtop'
+    inpFile = 'watVA.inpcrd'
 
     # set umbrella windows/angle restraints
     for i in range(-180,180,10):
@@ -336,5 +337,5 @@ if __name__ == '__main__':
 
     atomlist=[0,4,6,8]
     print('starting load/min')
-    load_and_minimize(opt.inmols, dogaff, dogaff2, opt.gaffdir, atomlist, opt.solvate==False)
+    load_and_minimize(opt.inmols, dogaff, dogaff2, opt.gaffdir, atomlist, opt.solvate)
 
