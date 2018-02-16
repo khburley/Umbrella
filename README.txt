@@ -7,7 +7,7 @@ This script used to take in a series of mol2 files and corresponding inpcrd and 
 
 trajCompnent.tcl
 To run this, copy script to same directory where GAFF/ is located and enter this line of code: for k in {0..350..10}; do echo $k; cd GAFF/$k; vmd -dispdev none -e ../../trajComponent.tcl -args 5 ../../vacDivaline.prmtop nvt01.dcd; cd ../../; done
-This script computes the dihedral angles that were generated during the simulations (you can modify which atom indices that it computes the dihedral for, if you'd like).
+This script computes the dihedral angles that were generated during the simulations (you can modify which atom indices that it computes the dihedral for, if you'd like).  The number of equilibration frames to be discarded can be specified following -args (it's 5 in the example above)
 
 overlap.py
 This script generates a graph of the dihedral angles for each simulation window and puts it in the GAFF/ directory
