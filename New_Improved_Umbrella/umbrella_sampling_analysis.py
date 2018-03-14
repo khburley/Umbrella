@@ -137,7 +137,7 @@ for k in range(K):
                 dchi[l] = 360.0 - abs(dchi[l])
 
         # Compute energy of snapshot n from simulation k in umbrella potential l
-        u_kln[k,:,n] = u_kn[k,n] + beta_k[k] * (K_k/2.0) * dchi**2
+        u_kln[k,:,n] = u_kn[k,n] + beta_k[k] * (K_k) * dchi**2
 
 # Initialize MBAR.
 print("Running MBAR...")
